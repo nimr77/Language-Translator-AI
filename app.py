@@ -237,7 +237,19 @@ Return ONLY the translated content, maintaining the exact same structure."""
         
         try:
             response = self.model.generate_content(prompt)
-            return response.text
+            translated_text = response.text
+            
+            # Remove markdown code block markers if present
+            translated_text = translated_text.strip()
+            if translated_text.startswith("```json"):
+                translated_text = translated_text[7:]  # Remove ```json
+            elif translated_text.startswith("```"):
+                translated_text = translated_text[3:]  # Remove ```
+            
+            if translated_text.endswith("```"):
+                translated_text = translated_text[:-3]  # Remove trailing ```
+            
+            return translated_text.strip()
         except Exception as e:
             console.print(f"❌ [bold red]Translation error for {language_name}:[/bold red] {e}")
             return None

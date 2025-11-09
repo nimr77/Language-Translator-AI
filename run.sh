@@ -44,11 +44,11 @@ source venv/bin/activate
 
 # Upgrade pip
 echo "⬆️  Upgrading pip..."
-pip install --upgrade pip --quiet
+python3 -m pip install --upgrade pip --quiet
 
 # Install dependencies
 echo "📥 Installing dependencies..."
-pip install -r requirements.txt --quiet
+python3 -m pip install -r requirements.txt --quiet
 
 echo ""
 echo "✅ Setup complete!"
